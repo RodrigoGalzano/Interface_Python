@@ -1,5 +1,7 @@
 import os
 
+from PySide6.QtGui import QPainter
+
 from qt_core import *
 
 class PyPushButton(QPushButton):
@@ -9,7 +11,7 @@ class PyPushButton(QPushButton):
                  minimim_width = 50,
                  text_padding = 55,
                  text_color = "#c3ccdf",
-                 icone_path = "",
+                 icon_path = "",
                  icon_color = "#c3ccdf",
                  btn_color = "#44475a",
                  btn_hover = "#4f5368",
@@ -28,7 +30,7 @@ class PyPushButton(QPushButton):
         self.minimum_width = minimim_width
         self.text_padding = text_padding
         self.text_color = text_color
-        self.icone_path = icone_path
+        self.icon_path = icon_path
         self.icon_color = icon_color
         self.btn_color = btn_color
         self.btn_hover = btn_hover
@@ -78,3 +80,38 @@ class PyPushButton(QPushButton):
             self.setStyleSheet(style)
         else:
             self.setStyleSheet(style + active_style)
+
+    def paintEvent(self, event):
+        # Return default style
+        QPushButton.paintEvent(self, event)
+
+        #Painter
+        qp = QPainter()
+        qp.begin(self)
+        qp.setRenderHint(QPainter.Antialiasing)
+        qp.setPen(Qt.NoPen)
+
+        rect = QRect(0, 0, self.minimum_width, self.height())
+
+        self.draw_icon(qp, self.icon_path, rect, self.icon_color)
+
+        qp.end()
+
+    def draw_icon(self, qp, image, rect, color):
+        # Format Path
+        app_path = os.path.abspath(os.getcwd())
+        folder = "gui/images/icons"
+        path = os.path.join(app_path, folder)
+        icon_path = os.path.normpath(os.path.join(path, image))
+
+        # Draw icon
+        icon = QPixmap(icon_path)
+        painter = QPainter(icon)
+        painter.setCompositionMode(QPainter.CompositionMode_SourceIn)
+        painter.fillRect(icon.rect(), color)
+        qp.drawPixmap(
+            (rect.width() - icon.width()) / 2,
+            (rect.height() - icon.height()) / 2,
+            icon
+        )
+        painter.end()

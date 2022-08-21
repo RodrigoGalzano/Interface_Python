@@ -39,9 +39,8 @@ class UI_MainWindow(object):
 
         # TOP FRAME MENU
         self.left_menu_top_frame = QFrame()
-        self.left_menu_top_frame.setMinimumHeight(50)
+        self.left_menu_top_frame.setMinimumHeight(40)
         self.left_menu_top_frame.setObjectName("left_menu_top_frame")
-        self.left_menu_top_frame.setStyleSheet("#left_menu_top_frame { background-color: red;}")
 
         # TOP FRAME LAYOUT
         self.left_menu_top_layout = QVBoxLayout(self.left_menu_top_frame)
@@ -49,9 +48,9 @@ class UI_MainWindow(object):
         self.left_menu_top_layout.setSpacing(0)
 
         # TOP BTNS
-        self.toggle_button = PyPushButton(text='Ocultar menu')
-        self.btn_1 = PyPushButton(text='Página Inicial', is_active=True)
-        self.btn_2 = PyPushButton(text='Página 2')
+        self.toggle_button = PyPushButton(text='Ocultar menu', icon_path="icon_menu.svg")
+        self.btn_1 = PyPushButton(text='Página Inicial', is_active=True, icon_path="icon_home.svg")
+        self.btn_2 = PyPushButton(text='Página 2', icon_path="icon_widgets.svg")
 
         # ADD BTNS TO LAYOUT
         self.left_menu_top_layout.addWidget(self.toggle_button)
@@ -64,9 +63,8 @@ class UI_MainWindow(object):
 
         # BOTTOM FRAME MENU
         self.left_menu_bottom_frame = QFrame()
-        self.left_menu_bottom_frame.setMinimumHeight(50)
+        self.left_menu_bottom_frame.setMinimumHeight(40)
         self.left_menu_bottom_frame.setObjectName("left_menu_bottom_frame")
-        self.left_menu_bottom_frame.setStyleSheet("#left_menu_bottom_frame { background-color: red;}")
 
         # BOTTOM FRAME LAYOUT
         # /////////////////////////////////////////////////////////////////
@@ -75,7 +73,7 @@ class UI_MainWindow(object):
         self.left_menu_bottom_layout.setSpacing(0)
 
         # BOTTOM BTNS
-        self.settings_btn = PyPushButton(text='Configurações')
+        self.settings_btn = PyPushButton(text='Configurações', icon_path="icon_settings.svg")
 
         # ADD BTNS TO LAYOUT
         self.left_menu_bottom_layout.addWidget(self.settings_btn)
